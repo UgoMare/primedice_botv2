@@ -1,0 +1,52 @@
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<style type="text/css"> 
+   #calc{ 
+   	border: 1px solid black;
+   	padding: 6px;
+   	cursor: pointer;
+   	background-color:grey;
+    font-family:tahoma; 
+     font-size:12px; 
+      color:white; 
+   } 
+   #calc:hover{
+   	background-color: black;
+   }
+   </style>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#calc").click(function(){
+	var steps = $( "input[name$='steps']" ).val();
+  	var val = $( "input[name$='val']" ).val();
+
+  	if ($( "input[name$='choix']:checked").val() == "balance"){
+  			$( "input[name$='result']" ).val((val / Math.pow(2,steps)).toFixed(8));
+        $( "#btch" ).html(((val / Math.pow(2,steps))*2496).toFixed(8));
+  	}
+  	else {
+  		$( "input[name$='result']" ).val(((Math.pow(2,steps) * val) - val).toFixed(8));
+      $( "#btch" ).html((val*2496).toFixed(8));
+  	}
+  });
+});
+
+</script>
+
+</head>
+<body>
+<div id="wrapper">
+	<h3>Steps Calculator</h3>
+	<div id="steps">
+		<span>Security Steps</span>
+		<input type="text" name="steps" value="1">
+	</div>
+	<div id="choice">
+			<input type= "radio" name="choix" value="balance" checked> Balance
+			<input type= "radio" name="choix" value="betamout"> Bet Amount
+			<input type="text" value="0.00000000" name="val"><br>
+	</div>
+	<span id="calc">Calculate</span>
+	<input type="text" value="0.00000000" name="result" readonly	><span> soit <b id="btch">0</b> BTC/h</span><br>
+</div>
+</body>
